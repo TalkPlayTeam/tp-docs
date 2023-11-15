@@ -68,11 +68,26 @@ CREATE TABLE IF NOT EXISTS TalkPlay.studio (
 CREATE TABLE IF NOT EXISTS TalkPlay.game (
     idGame INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(42) UNIQUE,
+    single VARCHAR(10),
     description VARCHAR(255),
     logo VARCHAR(255),
     banner VARCHAR(255),
     dateRelease DATETIME,
     platform VARCHAR(42)
+);
+
+CREATE TABLE IF NOT EXISTS TalkPlay.launcher (
+    idLauncher INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    name VARCHAR(42) UNIQUE,
+    logo VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS TalkPlay.on (
+    idGame INT NOT NULL,
+    idLauncher INT NOT NULL,
+    PRIMARY KEY (idGame, idLauncher),
+    FOREIGN KEY (idGame) REFERENCES game(idGame),
+    FOREIGN KEY (idLauncher) REFERENCES launcher(idLauncher)
 );
 
 CREATE TABLE IF NOT EXISTS TalkPlay.group (
